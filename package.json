@@ -1,16 +1,16 @@
 {
-  "name": "thaiairwaysbot",
+  "name": "thai-airways-ops-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord Bot for Thai Airways Virtual powered by Gemini AI",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "discord.js": "^14.26.4"
+    "discord.js": "^14.15.3",
+    "@google/generative-ai": "^0.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -3,17 +3,17 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const express = require('express');
 
-// ตั้งค่า Express เพื่อให้ Render ไม่ตัดการทำงาน
+// สร้าง Web Server เล็กๆ เพื่อให้ Render ไม่ตัดการเชื่อมต่อ
 const app = express();
 const port = process.env.PORT || 10000;
-app.get('/', (req, res) => res.send('Thai Airways Virtual AI is running!'));
-app.listen(port, () => console.log(`Web Service กำลังทำงานที่พอร์ต: ${port}`));
+app.get('/', (req, res) => res.send('Thai Airways Virtual AI is Active!'));
+app.listen(port, () => console.log(`Web Service is running on port: ${port}`));
 
-// ตั้งค่า AI
+// ตั้งค่า AI Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-// ตั้งค่า Discord Bot
+// ตั้งค่า Discord Bot พร้อม Intents ที่จำเป็น
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -23,7 +23,7 @@ const client = new Client({
 });
 
 client.on('ready', () => {
-    console.log(`CEO ครับ! บอท ${client.user.tag} พร้อมดูแลสายการบินไทยแล้ว!`);
+    console.log(`CEO Ruffino ครับ! บอท ${client.user.tag} ออนไลน์พร้อมดูแลสายการบินไทยแล้ว!`);
 });
 
 client.on('messageCreate', async (message) => {
@@ -38,10 +38,10 @@ client.on('messageCreate', async (message) => {
     }
 });
 
-// ตรวจสอบ Token ก่อน Login
+// ดึง TOKEN จาก Environment Variables
 const token = process.env.TOKEN;
 if (!token) {
-    console.error("Error: ไม่พบ TOKEN ใน Environment Variables!");
+    console.error("Error: ไม่พบ TOKEN ในระบบ!");
     process.exit(1);
 }
 

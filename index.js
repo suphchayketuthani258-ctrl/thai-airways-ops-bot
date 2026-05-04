@@ -1,4 +1,12 @@
 const { Client, GatewayIntentBits } = require('discord.js');
+const http = require('http'); // เพิ่มโมดูล http เพื่อสร้าง Server หลอก
+
+// --- ส่วนของ Server เพื่อให้ Render ตรวจพบ Port และออนไลน์ 24 ชม. ---
+http.createServer((req, res) => {
+    res.write("Thai Airways Bot is Online 24/7!");
+    res.end();
+}).listen(8080); 
+// ---------------------------------------------------------
 
 const client = new Client({
     intents: [
@@ -8,7 +16,7 @@ const client = new Client({
     ]
 });
 
-// นำ Token ที่ได้จากหน้า Developer Portal มาใส่ตรงนี้
+// ดึง Token จาก Environment Variables ที่เราตั้งค่าไว้ใน Render
 const TOKEN = process.env.TOKEN;
 
 client.once('ready', () => {
